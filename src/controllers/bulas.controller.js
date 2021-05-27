@@ -45,5 +45,36 @@ module.exports = {
         const bula = await Bulas.findOneAndUpdate({_id}, data, { new: true}); // Passando new: true para trazer os dados atualizado
 
         response.json(bula);
+    },
+
+    async partialSearch(request, response) {
+        let hint ="",
+            payload = "",
+            searchQ = request.body.search.toLowerCase();
+
+        if(searchQ.length > 0) {
+            Bulas.find(function (err, results) {
+                if ( err ) {
+                    console.log(err);
+                } else {
+                    results.forEach(function (result){
+                        if(result.nome_bula.indexOF(searchQ) !== -1) {
+                            if (hint === "") {
+                                hint="<a href='" + result.descricao_bula + "' target='_blank'>" + result.name_bula + "</a>"
+                            } else {
+                                hint  = hint + "<br /><a href='" + result.descricao_bula + "' target='_blank'>" + result.name_bula + "</a>";
+                            }
+                        }
+                    })
+                }
+                if (hint === "") {
+                    payload = "no results"
+                } else {
+                    payload = hint;
+                }
+
+                response.send({ Content: payload });
+            });
+        }
     }
 }

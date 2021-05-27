@@ -20,5 +20,6 @@ routes.get('/api/bulas', Bulas.index);
 routes.get('/api/bulas/details/:_id', Bulas.details);
 routes.delete('/api/bulas/:_id', Bulas.delete);
 routes.put('/api/bulas', Bulas.update);
+routes.post('/api/bulas/find', Bulas.partialSearch);
 
 module.exports = routes;
