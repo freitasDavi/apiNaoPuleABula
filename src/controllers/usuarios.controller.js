@@ -71,11 +71,11 @@ module.exports = {
         } else {
           user.isCorrectPassword(senha, async function (err, same) {
             if (err) {
-              return response.status(400).json({
+              return response.status(500).json({
                 message: "Erro no servidor. Por favor tente novamente",
               });
             } else if (!same) {
-              res.status(404).json({
+              response.status(404).json({
                 message: "Senha incorreta, por favor tente novamente",
               });
             } else {
