@@ -4,7 +4,9 @@ const Bulas = require('./controllers/bulas.controller');
 const routes = express.Router();
 
 
-routes.get('/', Usuario.index);
+routes.get('/', (request, response) => {
+    return response.json({ message: "API Não pule a bula rodando"});
+});
 
 // Rotas de Usuários
 routes.post('/api/usuarios', Usuario.create);
