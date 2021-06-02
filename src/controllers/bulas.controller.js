@@ -7,16 +7,36 @@ module.exports = {
     response.json(bula);
   },
   async create(request, response) {
-    const { nome_bula, descricao_bula, preco_bula } = request.body;
+    const {
+      nome_bula,
+      composicao_bula,
+      indicacao_bula,
+      mecanismo_bula,
+      contraindicacoes_bula,
+      cuidados_antes_bula,
+      armazenamento_bula,
+      como_usar_bula,
+      esqueceu_bula,
+      efeitos_colaterais_bula,
+      superdose_bula,
+    } = request.body;
 
     let data = {};
 
-    let bula = await Bulas.findOne({ descricao_bula });
+    let bula = await Bulas.findOne({ nome_bula });
     if (!bula) {
       data = {
         nome_bula,
-        descricao_bula,
-        preco_bula,
+        composicao_bula,
+        indicacao_bula,
+        mecanismo_bula,
+        contraindicacoes_bula,
+        cuidados_antes_bula,
+        armazenamento_bula,
+        como_usar_bula,
+        esqueceu_bula,
+        efeitos_colaterais_bula,
+        superdose_bula,
       };
       bula = await Bulas.create(data);
       return response.status(200).json(bula);
