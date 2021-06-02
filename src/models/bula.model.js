@@ -20,6 +20,7 @@ const DataSchema = new mongoose.Schema(
     esqueceu_bula: [String], // 7777 Esqueceu?
     efeitos_colaterais_bula: [String], // 888888888888888888 Efeitos Colaterais?
     superdose_bula: [String],
+    codigo_barras: String,
   },
   {
     timestamps: true,

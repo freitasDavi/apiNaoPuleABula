@@ -19,6 +19,7 @@ module.exports = {
       esqueceu_bula,
       efeitos_colaterais_bula,
       superdose_bula,
+      codigo_barras,
     } = request.body;
 
     let data = {};
@@ -37,6 +38,7 @@ module.exports = {
         esqueceu_bula,
         efeitos_colaterais_bula,
         superdose_bula,
+        codigo_barras,
       };
       bula = await Bulas.create(data);
       return response.status(200).json(bula);
@@ -87,5 +89,17 @@ module.exports = {
       const promise = await query.exec();
       return response.status(200).json(promise);
     }
+  },
+
+  async barCodeSearch(request, response) {
+    if (request.body.barCode.length === 0) {
+      return;
+    }
+
+    var codigoBarras = request.body.barCode;
+
+    var bula = await Bulas.find({ codigo_barras: codigoBarras });
+
+    return response.status(200).json(bula);
   },
 };
