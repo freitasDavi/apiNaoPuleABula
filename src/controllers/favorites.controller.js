@@ -1,4 +1,7 @@
 const Favorites = require("../models/favorites.model");
+const Bulas = require("../models/bula.model");
+const { json } = require("express");
+const mongoose = require("mongoose");
 
 module.exports = {
   async index(request, response) {
@@ -27,49 +30,38 @@ module.exports = {
   },
 
   async favList(request, response) {
-    const { id_usuario } = request.body;
-    const favoritos = await Favorites.findOne({ id_usuario });
+    const { _id } = request.body;
+    const favoritos = await Favorites.findOne({ _id });
 
     response.status(200).json(favoritos);
   },
 
   async removeFavorite(request, response) {
-    const { id_usuario, id_favorito } = request.body;
+    const { _id, id_favorito } = request.body;
+    try {
+      const favoritos = await Favorites.updateOne(
+        { _id },
+        { $pull: { bulas_favoritas: id_favorito } }
+      );
 
-    const favoritos = await Favorites.findOne({ id_usuario });
-
-    bulas_favoritas = favoritos.bulas_favoritas;
-
-    novos_favoritos = bulas_favoritas.filter(function (value, index, arr) {
-      return value !== id_favorito;
-    });
-
-    const data = { id_usuario, novos_favoritos };
-
-    const newFav = await Favorites.findOneAndUpdate(
-      { _id: favoritos._id },
-      data,
-      { new: true }
-    );
-
-    response.status(200).json(newFav);
+      response.status(200).json(favoritos);
+    } catch (e) {
+      response.status(500).json(e);
+    }
   },
 
   async addFavorite(request, response) {
-    const { id_usuario, id_favorito } = request.body;
+    const { _id, id_favorito, bulas_favoritas } = request.body;
 
-    const favoritos = await Favorites.findOne({ id_usuario });
+    try {
+      const favoritos = await Favorites.updateOne(
+        { _id },
+        { $push: { bulas_favoritas: bulas_favoritas } }
+      );
 
-    novos_favoritos = favoritos.bulas_favoritas.push(id_favorito);
-
-    const data = { id_usuario, novos_favoritos };
-
-    const newFav = await Favorites.findOneAndUpdate(
-      { _id: favoritos._id },
-      data,
-      { new: true }
-    );
-
-    response.status(200).json(newFav);
+      response.status(200).json(favoritos);
+    } catch (e) {
+      response.status(500).json(e);
+    }
   },
 };

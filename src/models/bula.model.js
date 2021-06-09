@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const DataSchema = new mongoose.Schema(
   {
     nome_bula: String, // Rivotril
+    generico: String,
     composicao_bula: String, // Rivotril Gotas de 2,5 mg
     indicacao_bula: [
       // 111111111
@@ -20,13 +21,19 @@ const DataSchema = new mongoose.Schema(
     esqueceu_bula: [String], // 7777 Esqueceu?
     efeitos_colaterais_bula: [String], // 888888888888888888 Efeitos Colaterais?
     superdose_bula: [String],
+    identificacao: [String],
+    apresentacao: [String],
+    apresentacaoBold: [String],
+    composicao: [String],
+    fabricante: [String],
     codigo_barras: String,
+    url_imagem: String,
   },
   {
     timestamps: true,
   }
 );
 
-const usuarios = mongoose.model("bulas", DataSchema);
+const usuarios = mongoose.model("remedios", DataSchema);
 
 module.exports = usuarios;

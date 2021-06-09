@@ -9,6 +9,7 @@ module.exports = {
   async create(request, response) {
     const {
       nome_bula,
+      generico,
       composicao_bula,
       indicacao_bula,
       mecanismo_bula,
@@ -19,7 +20,13 @@ module.exports = {
       esqueceu_bula,
       efeitos_colaterais_bula,
       superdose_bula,
+      identificacao,
+      apresentacao,
+      apresentacaoBold,
+      composicao,
+      fabricante,
       codigo_barras,
+      url_imagem,
     } = request.body;
 
     let data = {};
@@ -28,6 +35,7 @@ module.exports = {
     if (!bula) {
       data = {
         nome_bula,
+        generico,
         composicao_bula,
         indicacao_bula,
         mecanismo_bula,
@@ -38,7 +46,13 @@ module.exports = {
         esqueceu_bula,
         efeitos_colaterais_bula,
         superdose_bula,
+        identificacao,
+        apresentacao,
+        apresentacaoBold,
+        composicao,
+        fabricante,
         codigo_barras,
+        url_imagem,
       };
       bula = await Bulas.create(data);
       return response.status(200).json(bula);

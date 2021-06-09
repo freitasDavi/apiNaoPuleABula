@@ -7,6 +7,9 @@ const DataSchema = new mongoose.Schema(
     email_usuario: String,
     tipo_usuario: { type: Number, default: 1 },
     senha_usuario: String,
+    alergia_usuario: [String],
+    medicamentos_usuario: [String],
+    nascimento_usuario: String,
   },
   {
     timestamps: true,
@@ -39,6 +42,6 @@ DataSchema.methods.isCorrectPassword = function (password, callback) {
   });
 };
 
-const usuarios = mongoose.model("usuarios", DataSchema);
+const usuarios = mongoose.model("user", DataSchema);
 
 module.exports = usuarios;

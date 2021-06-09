@@ -9,8 +9,15 @@ module.exports = {
     response.json(user);
   },
   async create(request, response) {
-    const { nome_usuario, email_usuario, tipo_usuario, senha_usuario } =
-      request.body;
+    const {
+      nome_usuario,
+      email_usuario,
+      tipo_usuario,
+      senha_usuario,
+      nascimento_usuario,
+      alergia_usuario,
+      medicamentos_usuario,
+    } = request.body;
 
     let data = {};
 
@@ -21,6 +28,9 @@ module.exports = {
         email_usuario,
         tipo_usuario,
         senha_usuario,
+        nascimento_usuario,
+        alergia_usuario,
+        medicamentos_usuario,
       };
       user = await Usuario.create(data);
       return response.status(200).json(user);
