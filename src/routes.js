@@ -27,6 +27,7 @@ routes.post("/api/bulas/codigoBarras", Bulas.barCodeSearch);
 
 // Rotas dos favoritos
 routes.post("/api/favoritos", Favoritos.create);
+routes.post("/api/favoritos/login", Favoritos.login);
 routes.post("/api/favoritos/listar", Favoritos.favList);
 routes.post("/api/favoritos/add", Favoritos.addFavorite);
 routes.post("/api/favoritos/remove", Favoritos.removeFavorite);
