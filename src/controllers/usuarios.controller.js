@@ -54,10 +54,20 @@ module.exports = {
   },
 
   async update(request, response) {
-    const { _id, nome_usuario, email_usuario, tipo_usuario, senha_usuario } =
-      request.body;
+    const {
+      _id,
+      alergia_usuario,
+      email_usuario,
+      nascimento_usuario,
+      senha_usuario,
+    } = request.body;
 
-    const data = { nome_usuario, email_usuario, tipo_usuario, senha_usuario };
+    const data = {
+      alergia_usuario,
+      email_usuario,
+      nascimento_usuario,
+      senha_usuario,
+    };
 
     const user = await Usuario.findOneAndUpdate({ _id }, data, { new: true }); // Passando new: true para trazer os dados atualizado
 
